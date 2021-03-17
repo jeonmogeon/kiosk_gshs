@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>kndl.kr</title>
+    <link rel="stylesheet" href="http://kndl.kr/static/stylesheets/layout.css?v=1">
+    <link rel="stylesheet" href="http://kndl.kr/static/stylesheets/index.css?v=1">
+</head>
+  <body>
+      <main>
+            <br/>
+<div class="center-box">
+    <h1 style="font-size: 180px;">
+        00 : 00
+    </h1>
+<h2 style="font-size: 100px;">
+00 / 00
+</h2>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+    <h2 style="margin: 0;">변경하기</h2>
+    <a href="/birth"><button class="home-button">생일자 축하</button></a>
+</div>
+
+<br/>
+<br/>
+<br/>
+<br/>
+        </main>
+<script>
+const clockBox = document.querySelector('h1')
+const dateBox = document.querySelector('h2')
+
+function clock() {
+    const date = new Date()
+    const month = date.getMonth()
+    const day = date.getDate()
+    const hours = date.getHours().toString().padStart(2, '0')
+    const minutes = date.getMinutes().toString().padStart(2, '0')
+    const seconds = date.getSeconds().toString().padStart(2, '0')
+    clockBox.innerText = `${hours} : ${minutes} : ${seconds}`
+dateBox.innerText = `${month} / ${day}`
+}
+
+clock()
+setInterval(clock, 1000)
+</script>
+  </body>
+</html>
