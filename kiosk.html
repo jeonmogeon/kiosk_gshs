@@ -1,62 +1,427 @@
 <!DOCTYPE html>
-<html><head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>kndl.kr</title>
-    <link rel="stylesheet" href="layout.css">
-    <link rel="stylesheet" href="index.css">
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="theme-color" content="#000000">
+    <style>
+        @font-face {
+            font-family: Noto Sans KR;
+            src: local(NotoSansKR-Black.otf) format('embedded-opentype'),
+                local(NotoSansKR-Bold.otf) format('embedded-opentype'),
+                local(NotoSansKR-Light.otf) format('embedded-opentype'),
+                local(NotoSansKR-Medium.otf) format('embedded-opentype'),
+                local(NotoSansKR-Regular.otf) format('embedded-opentype'),
+                local(NotoSansKR-Thin.otf) format('embedded-opentype')
+        }
+
+        * {
+            font-family: 'futura-pt', 'Noto Sans KR', sans-serif;
+            box-sizing: border-box;
+            color: white;
+        }
+
+        html {
+            height: 100%;
+        }
+
+        body {
+            height: 100%;
+            margin: 0;
+            font-family: 'Noto Sans CJK KR', 'Noto Sans KR', Arial, sans-serif;
+        }
+
+        a {
+            text-decoration: none;
+            color: black;
+        }
+
+        #content {
+            min-height: 100%;
+        }
+
+        nav {
+            padding: 5px 10px;
+        }
+
+        .nav-items {
+            box-sizing: border-box;
+            margin-left: 10px;
+            font-weight: 700;
+            color: black;
+            padding: 5px;
+            top: 5px;
+        }
+
+        #nav-right-items {
+            float: right;
+            display: inline-flex;
+            float: row-reverse;
+            font-size: 20px;
+        }
+
+        #logo {
+            font-weight: 900;
+            font-size: 30px;
+            color: black;
+        }
+
+        #logo:hover {
+            font-weight: 900;
+            font-size: 35px;
+            color: skyblue;
+        }
+
+        main {
+            margin: 8px;
+        }
+
+        .center-box {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            margin-top: 50px;
+            text-align: center;
+            align-items: center;
+        }
+
+        h1 {
+            font-size: 50px;
+            font-weight: 800;
+        }
+
+        p {
+            font-size: 18px;
+        }
+
+        footer {
+            box-sizing: border-box;
+            background-color: black;
+            color: white;
+            padding: 10px 20px;
+            width: 100%;
+            position: absolute;
+            left: 0;
+        }
+
+        .footer-a {
+            color: skyblue;
+        }
+
+        #mobile-menu {
+            float: right;
+            float: row-reverse;
+            font-size: 20px;
+            border: none;
+            padding: 10px
+        }
+
+        .dropdown-content {
+            box-sizing: border-box;
+            border-top: 1px solid black;
+            color: black;
+            padding: 5px 3px;
+            font-size: 17px;
+        }
+
+        #dropdown-contents {
+            display: none;
+        }
+
+        @media(min-width: 800px) {
+            #mobile-menu {
+                display: none;
+            }
+        }
+
+        @media(max-width: 800px) {
+            #nav-right-items {
+                display: none;
+            }
+
+            #mobile-menu {
+                display: inline-flex;
+            }
+        }
+
+        .home-button {
+            border: 0;
+            color: black;
+            display: block;
+            padding: 10px;
+            border-radius: 10px;
+            font-size: 18px;
+            font-weight: 500;
+            margin-top: 10px;
+            width: 300px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .home-button:hover {
+            background-color: #68c3e8;
+            font-size: 19px;
+            transform: scale(1.1);
+            -webkit-transform: scale(1.1);
+            -moz-transform: scale(1.1);
+            -ms-transform: scale(1.1);
+            -o-transform: scale(1.1);
+        }
+
+        a {
+            transition: all 0.3s;
+        }
+
+        a:hover {
+            color: skyblue;
+            font-size: 120%;
+        }
+
+        table {
+            text-align: center;
+            border-collapse: collapse;
+            border: 2px solid black;
+        }
+
+        td {
+            color: black;
+            border-top: 0.5px solid black;
+            border-bottom: 0;
+            border-right: 0.5px solid black;
+            border-left: 0;
+            padding: 5px;
+        }
+
+        body {
+            margin: 0;
+            background: linear-gradient(to bottom, #05003d 0%, #3d4188 70%, #c3888a 120%);
+            width: 100vw;
+            min-height: 100vh;
+            overflow-x: hidden;
+            background-attachment: fixed;
+        }
+
+        #root {
+            z-index: 1;
+        }
+
+        .star {
+            z-index: 0;
+            width: 3px;
+            height: 3px;
+            border-radius: 50%;
+            position: absolute;
+            background-color: rgba(237, 205, 163, 0.8);
+            box-shadow: 0 0 40px 0 rgba(237, 205, 163, 0.8), 0 0 20px 0 #FFFFFF;
+            animation: glow 5s infinite;
+        }
+
+        .star--medium {
+            z-index: 0;
+            width: 6px;
+            height: 6px;
+        }
+
+        .star--big {
+            z-index: 0;
+            width: 9px;
+            height: 9px;
+            box-shadow: 0 0 40px 0 #EDCDA3, 0 0 20px 0 #FFFFFF, inset 0 0 4px #FFFFFF;
+        }
+
+        .comet {
+            z-index: 0;
+            width: 5px;
+            height: 5px;
+            background-color: rgba(255, 255, 255, 0.6);
+            /*box-shadow: 0 0 40px 0 #EDCDA3, 0 0 20px 0 #FFFFFF, inset 0 0 8px rgba(255, 255, 255, 0.6);*/
+            box-shadow: 0 0 7px 7px rgba(255, 255, 255, .3);
+            top: 0;
+            opacity: 0.3;
+            transform: rotate(-45deg) translate(0, -50px);
+            animation: comet 50s infinite;
+        }
+
+        .comet:after {
+            z-index: 0;
+            content: '';
+            width: 10vw;
+            height: 4px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.1);
+            box-shadow: 0 0 60px rgba(237, 205, 163, 0.4);
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        @keyframes glow {
+            0% {
+                opacity: 0.9;
+            }
+
+            50% {
+                opacity: 0.2;
+            }
+
+            100% {
+                opacity: 0.9;
+            }
+        }
+
+        @keyframes comet {
+            0% {
+                transform: rotate(-45deg) translateX(0);
+                opacity: 0.3;
+            }
+
+            10% {
+                opacity: 1;
+            }
+
+            20% {
+                transform: rotate(-45deg) translateX(-100vw);
+                opacity: 0;
+            }
+
+            100% {
+                transform: rotate(-45deg) translateX(-100vw);
+                opacity: 0;
+            }
+        }
+    </style>
 </head>
-  <body>
-      <main>
-            <br/>
-<div class="center-box">
-    <h1 style="font-size: 180px;">
-        00 : 00
-    </h1>
-<h2 style="font-size: 100px;">
-00 / 00
-</h2>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-    <h2 style="margin: 0;">변경하기</h2>
-    <a href="/birth"><button class="home-button">생일자 축하</button></a>
-</div>
 
-<br/>
-<br/>
-<br/>
-<br/>
-        </main>
-<script>
-const clockBox = document.querySelector('h1')
-const dateBox = document.querySelector('h2')
+<body>
+    <div class="star star--big" style="top:6vh;left:93vw;animation-duration:4914ms;animation-delay:480ms;"></div>
+    <div class="star" style="top:24vh;left:50vw;animation-duration:3292ms;animation-delay:2231ms;"></div>
+    <div class="star" style="top:24vh;left:95vw;animation-duration:4053ms;animation-delay:847ms;"></div>
+    <div class="star" style="top:65vh;left:13vw;animation-duration:3567ms;animation-delay:546ms;"></div>
+    <div class="star" style="top:6vh;left:70vw;animation-duration:5279ms;animation-delay:816ms;"></div>
+    <div class="star" style="top:85vh;left:61vw;animation-duration:5391ms;animation-delay:2633ms;"></div>
+    <div class="star" style="top:91vh;left:60vw;animation-duration:5834ms;animation-delay:535ms;"></div>
+    <div class="star" style="top:61vh;left:39vw;animation-duration:5320ms;animation-delay:2783ms;"></div>
+    <div class="star" style="top:98vh;left:83vw;animation-duration:4385ms;animation-delay:2212ms;"></div>
+    <div class="star star--medium" style="top:50vh;left:78vw;animation-duration:4370ms;animation-delay:1731ms;"></div>
+    <div class="star" style="top:74vh;left:80vw;animation-duration:5176ms;animation-delay:1421ms;"></div>
+    <div class="star" style="top:54vh;left:79vw;animation-duration:3642ms;animation-delay:149ms;"></div>
+    <div class="star" style="top:63vh;left:30vw;animation-duration:3655ms;animation-delay:919ms;"></div>
+    <div class="star" style="top:89vh;left:78vw;animation-duration:5968ms;animation-delay:2479ms;"></div>
+    <div class="star" style="top:37vh;left:9vw;animation-duration:3947ms;animation-delay:881ms;"></div>
+    <div class="star" style="top:36vh;left:40vw;animation-duration:3297ms;animation-delay:1364ms;"></div>
+    <div class="star" style="top:41vh;left:15vw;animation-duration:4726ms;animation-delay:1995ms;"></div>
+    <div class="star" style="top:23vh;left:54vw;animation-duration:3421ms;animation-delay:2506ms;"></div>
+    <div class="star star--medium" style="top:69vh;left:37vw;animation-duration:4121ms;animation-delay:69ms;"></div>
+    <div class="star" style="top:72vh;left:85vw;animation-duration:4436ms;animation-delay:1587ms;"></div>
+    <div class="star star--big" style="top:7vh;left:61vw;animation-duration:5639ms;animation-delay:746ms;"></div>
+    <div class="star" style="top:1vh;left:21vw;animation-duration:3302ms;animation-delay:993ms;"></div>
+    <div class="star" style="top:11vh;left:81vw;animation-duration:4153ms;animation-delay:993ms;"></div>
+    <div class="star" style="top:86vh;left:52vw;animation-duration:3651ms;animation-delay:2303ms;"></div>
+    <div class="star" style="top:46vh;left:3vw;animation-duration:4389ms;animation-delay:57ms;"></div>
+    <div class="star" style="top:96vh;left:53vw;animation-duration:5374ms;animation-delay:2877ms;"></div>
+    <div class="star" style="top:81vh;left:60vw;animation-duration:3029ms;animation-delay:1219ms;"></div>
+    <div class="star star--medium" style="top:6vh;left:75vw;animation-duration:3280ms;animation-delay:203ms;"></div>
+    <div class="star" style="top:18vh;left:91vw;animation-duration:3508ms;animation-delay:1008ms;"></div>
+    <div class="star" style="top:98vh;left:64vw;animation-duration:5905ms;animation-delay:1580ms;"></div>
+    <div class="star" style="top:29vh;left:86vw;animation-duration:5142ms;animation-delay:2765ms;"></div>
+    <div class="star" style="top:58vh;left:34vw;animation-duration:3910ms;animation-delay:884ms;"></div>
+    <div class="star" style="top:34vh;left:85vw;animation-duration:5414ms;animation-delay:1819ms;"></div>
+    <div class="star" style="top:27vh;left:8vw;animation-duration:3958ms;animation-delay:1583ms;"></div>
+    <div class="star" style="top:47vh;left:78vw;animation-duration:4367ms;animation-delay:95ms;"></div>
+    <div class="star" style="top:28vh;left:23vw;animation-duration:3518ms;animation-delay:1032ms;"></div>
+    <div class="star star--medium" style="top:27vh;left:35vw;animation-duration:4649ms;animation-delay:2791ms;"></div>
+    <div class="star" style="top:26vh;left:70vw;animation-duration:5029ms;animation-delay:320ms;"></div>
+    <div class="star" style="top:51vh;left:32vw;animation-duration:3388ms;animation-delay:1243ms;"></div>
+    <div class="star" style="top:49vh;left:74vw;animation-duration:5499ms;animation-delay:2550ms;"></div>
+    <div class="star star--big" style="top:34vh;left:7vw;animation-duration:5027ms;animation-delay:1240ms;"></div>
+    <div class="star" style="top:36vh;left:33vw;animation-duration:3648ms;animation-delay:795ms;"></div>
+    <div class="star" style="top:25vh;left:16vw;animation-duration:3992ms;animation-delay:2865ms;"></div>
+    <div class="star" style="top:9vh;left:18vw;animation-duration:3530ms;animation-delay:2580ms;"></div>
+    <div class="star" style="top:8vh;left:0vw;animation-duration:3481ms;animation-delay:944ms;"></div>
+    <div class="star star--medium" style="top:63vh;left:17vw;animation-duration:5829ms;animation-delay:490ms;"></div>
+    <div class="star" style="top:18vh;left:75vw;animation-duration:4681ms;animation-delay:2420ms;"></div>
+    <div class="star" style="top:17vh;left:40vw;animation-duration:4425ms;animation-delay:983ms;"></div>
+    <div class="star" style="top:52vh;left:8vw;animation-duration:3466ms;animation-delay:1339ms;"></div>
+    <div class="star" style="top:26vh;left:73vw;animation-duration:4035ms;animation-delay:2703ms;"></div>
+    <div class="star" style="top:31vh;left:30vw;animation-duration:5510ms;animation-delay:766ms;"></div>
+    <div class="star" style="top:38vh;left:86vw;animation-duration:4576ms;animation-delay:2444ms;"></div>
+    <div class="star" style="top:69vh;left:13vw;animation-duration:4159ms;animation-delay:113ms;"></div>
+    <div class="star" style="top:19vh;left:61vw;animation-duration:5661ms;animation-delay:1269ms;"></div>
+    <div class="star star--medium" style="top:32vh;left:78vw;animation-duration:3226ms;animation-delay:994ms;"></div>
+    <div class="star" style="top:9vh;left:13vw;animation-duration:3509ms;animation-delay:1067ms;"></div>
+    <div class="star" style="top:75vh;left:79vw;animation-duration:3464ms;animation-delay:1712ms;"></div>
+    <div class="star" style="top:45vh;left:4vw;animation-duration:3313ms;animation-delay:2682ms;"></div>
+    <div class="star" style="top:33vh;left:78vw;animation-duration:3513ms;animation-delay:545ms;"></div>
+    <div class="star" style="top:27vh;left:84vw;animation-duration:4183ms;animation-delay:1335ms;"></div>
+    <div class="star star--big" style="top:93vh;left:21vw;animation-duration:3871ms;animation-delay:2513ms;"></div>
+    <div class="star" style="top:68vh;left:75vw;animation-duration:5803ms;animation-delay:2833ms;"></div>
+    <div class="star" style="top:41vh;left:3vw;animation-duration:3529ms;animation-delay:2416ms;"></div>
+    <div class="star star--medium" style="top:99vh;left:59vw;animation-duration:5174ms;animation-delay:2226ms;"></div>
+    <div class="star" style="top:59vh;left:78vw;animation-duration:4077ms;animation-delay:599ms;"></div>
+    <div class="star" style="top:19vh;left:61vw;animation-duration:4948ms;animation-delay:154ms;"></div>
+    <div class="star" style="top:33vh;left:93vw;animation-duration:4500ms;animation-delay:2877ms;"></div>
+    <div class="star" style="top:20vh;left:48vw;animation-duration:4402ms;animation-delay:946ms;"></div>
+    <div class="star" style="top:35vh;left:81vw;animation-duration:5640ms;animation-delay:2838ms;"></div>
+    <div class="star" style="top:84vh;left:56vw;animation-duration:4237ms;animation-delay:2255ms;"></div>
+    <div class="star" style="top:81vh;left:8vw;animation-duration:3910ms;animation-delay:2757ms;"></div>
+    <div class="star" style="top:35vh;left:33vw;animation-duration:4844ms;animation-delay:48ms;"></div>
+    <div class="star star--medium" style="top:74vh;left:94vw;animation-duration:4445ms;animation-delay:547ms;"></div>
+    <div class="star" style="top:70vh;left:17vw;animation-duration:4027ms;animation-delay:1686ms;"></div>
+    <div class="star" style="top:37vh;left:41vw;animation-duration:3647ms;animation-delay:309ms;"></div>
+    <main>
+        <br />
+        <div class="center-box">
+            <h1 style="font-size: 200px;">
+                00 : 00
+            </h1>
+            <h2 style="font-size: 100px;">
+                00 / 00
+            </h2>
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <h2 style="margin: 0;">변경하기</h2>
+            <a href="/birthday.html"><button class="home-button">생일자 축하</button></a>
+        </div>
 
-function clock() {
-    const date = new Date()
-    const month = date.getMonth()
-    const day = date.getDate()
-    const hours = date.getHours().toString().padStart(2, '0')
-    const minutes = date.getMinutes().toString().padStart(2, '0')
-    const seconds = date.getSeconds().toString().padStart(2, '0')
-    clockBox.innerText = `${hours} : ${minutes} : ${seconds}`
-dateBox.innerText = `오늘은 ${month+1}월 ${day}일 입니다!`
-}
+        <br />
+        <br />
+        <br />
+        <br />
+    </main>
+    <script>
+        const clockBox = document.querySelector('h1')
+        const dateBox = document.querySelector('h2')
+        var weekday = new Array(7);
+        weekday[0] = "Sunday";
+        weekday[1] = "Monday";
+        weekday[2] = "Tuesday";
+        weekday[3] = "Wednesday";
+        weekday[4] = "Thursday";
+        weekday[5] = "Friday";
+        weekday[6] = "Saturday";
+        function clock() {
+            const date = new Date()
+            const month = date.getMonth()
+            const day = date.getDate()
+            const hours = date.getHours().toString().padStart(2, '0')
+            const minutes = date.getMinutes().toString().padStart(2, '0')
+            const seconds = date.getSeconds().toString().padStart(2, '0')
+            const dam = weekday[date.getDay()];
+            clockBox.innerText = `${hours} : ${minutes} : ${seconds}`
+            dateBox.innerText = `${month + 1}M ${day}D ${dam}`
+        }
 
-clock()
-setInterval(clock, 1000)
-</script>
+        clock()
+        setInterval(clock, 1000)
+    </script>
+</body>
 
-    <footer>
-	Made by RISS
-        <small>& CSS from GSHS 37th 김재흔</small>
-    </footer>
-  </body>
 </html>
